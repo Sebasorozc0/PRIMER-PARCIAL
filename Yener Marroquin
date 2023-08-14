@@ -1,0 +1,248 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int a, b, c, d, e, j, k, l, m, n;
+int buscar;
+int busquedaLineal(int arreglo[], int tamano, int valorBuscado) {
+	for (int i = 0; i < tamano; i++) {
+		if (arreglo[i] == valorBuscado) {
+			return i; 
+		}
+	}
+	return 99999; 
+}
+
+int busquedaContador(int arr[], int size, int target, int& contador) {
+	int occurrences = 0;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] == target) {
+			contador += arr[i];
+			occurrences++;
+		}
+	}
+	return occurrences;
+}
+
+int busquedaBinaria(int arreglo[], int inicio, int fin, int valorBuscado) {
+	if (inicio <= fin) {
+		int medio = inicio + (fin - inicio) / 2;
+		if (arreglo[medio] == valorBuscado) {
+			return medio;
+		}
+		else if (arreglo[medio] > valorBuscado) {
+			return busquedaBinaria(arreglo, inicio, medio - 1, valorBuscado);
+		}
+		return busquedaBinaria(arreglo, medio + 1, fin, valorBuscado);
+	}
+	return -1;
+}
+
+void insercion(string arr[], int n) {
+	for (int i = 1; i < n; i++) {
+		string N = arr[i];
+		int j = i - 1;
+		while (j >= 0 && arr[j] > N) {
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = N;
+	}
+}
+
+void burbujades(int arr[], int n) {
+	for (int i = 0; i < n - 1; i++) {
+		for (int j = 0; j < n - i - 1; j++) {
+			if (arr[j] < arr[j + 1]) {
+
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+void burbujaasc(int arr[], int n) {
+	for (int i = 0; i < n - 1; i++) {
+		for (int j = 0; j < n - i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+void seleccionasc(int arr[], int n) {
+	for (int i = 0; i < n - 1; i++) {
+		int min_idx = i;
+		for (int j = i + 1; j < n; j++) {
+			if (arr[j] < arr[min_idx])
+				min_idx = j;
+		}
+		int temp = arr[min_idx];
+		arr[min_idx] = arr[i];
+		arr[i] = temp;
+	}
+}
+
+void selecciondes(int arr[], int n) {
+	for (int i = 0; i < n - 1; i++) {
+		int min_idx = i;
+		for (int j = i + 1; j < n; j++) {
+			if (arr[j] > arr[min_idx])
+				min_idx = j;
+		}
+		int temp = arr[min_idx];
+		arr[min_idx] = arr[i];
+		arr[i] = temp;
+	}
+}
+
+void insercionasc(int arr[], int n) {
+	for (int i = 1; i < n; i++) {
+		int key = arr[i];
+		int j = i - 1;
+
+		while (j >= 0 && arr[j] > key) {
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+void inserciondes(int arr[], int n) {
+	for (int i = 1; i < n; i++) {
+		int key = arr[i];
+		int j = i - 1;
+
+		while (j >= 0 && arr[j] < key) {
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+int main() {
+	int n1, n2, n3, n4, n5, n6, n7, n8, n9, n10;
+	int opcion;
+	cout << "Inserte el primer numero: ";
+	cin >> n1;
+	cout << "Inserte el segundo numero: ";
+	cin >> n2;
+	cout << "Inserte el tercer numero: ";
+	cin >> n3;
+	cout << "Inserte el cuarto numero: ";
+	cin >> n4;
+	cout << "Inserte el quinto numero: ";
+	cin >> n5;
+	cout << "Inserte el sexto numero: ";
+	cin >> n6;
+	cout << "Inserte el septimo numero: ";
+	cin >> n7;
+	cout << "Inserte el octavo numero: ";
+	cin >> n8;
+	cout << "Inserte el noveno  numero: ";
+	cin >> n9;
+	cout << "Inserte el decimo  numero: ";
+	cin >> n10;
+
+
+	int arr[] = { n1, n2, n3, n4, n5, n6, n7, n8, n9, n10 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	int valor = buscar;
+
+
+	system("cls");
+
+	cout << "Que metodo y orden desea visualizar?" << endl;
+	cout << "1. Algoritmo de seleccion con numeros" << endl;
+	cout << "2. Algoritmo de insercion cadena de texto" << endl;
+	cout << "3. Algoritmo de burbuja y seleccion" << endl;
+	cout << "4. Busqueda lineal" << endl;
+	cout << "5. Busqueda binaria" << endl;
+	cout << "6. Contador" << endl;
+	cin >> opcion;
+
+	if (opcion == 1) {
+
+		burbujaasc(arr, n);
+		cout << "Arreglo ordenado ascendentemente: " << endl;
+		for (int i = 0; i < n; i++)
+			cout << arr[i] << endl;
+	}
+
+	else if (opcion == 2) {
+		const int letra = 10;
+		string arr[letra];
+
+		cout << "Ingrese " << letra << " letras" << endl;
+		for (int i = 0; i < letra; i++) {
+			cout << "Letra " << i + 1 << ": ";
+			cin >> arr[i];
+		}
+
+		insercion(arr, letra);
+
+		cout << "Arreglo ordenado:" << endl;
+		for (int i = 0; i < letra; i++) {
+			cout << arr[i] << " ";
+		}
+
+	}
+
+	else if (opcion == 3) {
+		seleccionasc(arr, n);
+		cout << "Arreglo ordenado ascendentemente: " << endl;
+		for (int i = 0; i < n; i++)
+			cout << arr[i] << "" << endl;
+
+
+	}
+
+	else if (opcion == 4) {
+		selecciondes(arr, n);
+		cout << "Arreglo ordenado descendentemente: " << endl;
+		for (int i = 0; i < n; i++)
+			cout << arr[i] << "" << endl;
+
+
+	}
+
+	else if (opcion == 5) {
+		cout << "Ingrese el numero a buscar: ";
+		cin >> valor;
+		insercionasc(arr, n);
+		cout << "Arreglo ordenado ascendentemente: " << endl;
+		for (int i = 0; i < n; i++) {
+			cout << arr[i] << "" << endl;
+		}
+
+		int resultado = busquedaBinaria(arr, 0, n - 1, valor);
+		if (resultado != -1) {
+			cout << "El valor " << valor << " se encuentra en el puesto " << resultado << endl;
+		}
+		else {
+			cout << "El valor " << valor << " no se encuentra en el arreglo" << endl;
+		}
+
+	}
+
+	else if (opcion == 6) {
+		cout << "Ingrese el valor a buscar: ";
+		cin >> valor;
+		int contador = 0;
+		int ocurrencias = busquedaContador(arr, n, valor, contador);
+
+		cout << "El elemento aparece " << ocurrencias << " veces " << endl;
+		cout << "La suma de los valores es: " << contador << endl;
+	}
+}
+
+// Diseña un algoritmo de ordenamiento basado en los enfoques de burbuja y selección es la opcion 3 
+// y tambien implemente el tipo de busqueda lineal en el codigo
